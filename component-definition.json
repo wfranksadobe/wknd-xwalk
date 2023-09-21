@@ -4,6 +4,31 @@
       "title": "Franklin Components",
       "id": "general",
       "components": [{
+        "title": "Block Item",
+        "id": "blockItem",
+        "plugins": {
+          "aem": {
+            "page":{
+              "resourceType": "core/franklin/components/blockItem/v1/blockItem",
+              "template": {
+                "jcr:title": "Default Title"
+              }
+            }
+          }
+        },
+        "model": {
+          "id": "blockItem",
+          "uri": "",
+          "fields": [{ 
+            "component": "text-input",
+            "valueType": "string", 
+            "name": "description", 
+            "value": "Default alt", 
+            "label": "Description" 
+          }]
+        }
+      },
+      {
           "title": "Title",
           "id": "title",
           "plugins": {
