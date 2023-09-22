@@ -6,7 +6,7 @@
       "components": [
         {
           "title": "Block Item",
-          "id": "blockItem",
+          "id": "block-item",
           "plugins": {
             "aem": {
               "page": {
