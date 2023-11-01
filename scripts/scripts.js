@@ -13,9 +13,10 @@ import {
   loadCSS,
   toClassName,
   buildBlock,
-  decorateBlock,
   readBlockConfig,
 } from './lib-franklin.js';
+
+import { initSidekick } from './sidekick/sidekick.js';
 
 const LCP_BLOCKS = []; // add your LCP blocks to the list
 window.hlx.RUM_GENERATION = 'project-1'; // add your RUM generation information here
@@ -273,6 +274,7 @@ function loadDelayed() {
   // eslint-disable-next-line import/no-cycle
   window.setTimeout(() => import('./delayed.js'), 3000);
   // load anything that can be postponed to the latest here
+  initSidekick();
 }
 
 async function loadPage() {
