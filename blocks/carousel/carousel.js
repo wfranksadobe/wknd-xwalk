@@ -22,7 +22,7 @@ export default function decorate(block) {
   block.parentElement.append(buttons);
 
   // listener for editor
-  window.addEventListener('changedSelectedComponent', (e) => {
+  window.addEventListener('ue:changedSelectedComponent', (e) => {
     const element = document.querySelector(e.detail);
     if (element.parentElement?.classList.contains('carousel')) {
       element.parentElement.scrollTo({ top: 0, left: element.offsetLeft - element.parentNode.offsetLeft, behavior: 'instant' });
