@@ -95,13 +95,14 @@ export default function decorate($block) {
       tab.$content.classList.remove('hidden');
     }
   });
-}
 
-window.addEventListener('changedSelectedComponent', (e) => {
-  const element = document.querySelector(e.detail);
-  if (element.classList.contains('tab-item')) {
-    const index = element.getAttribute('data-tab-index');
-    const button = document.querySelector(`button[data-tab-index="${index}"]`);
-    button.click();
-  }
-});
+  window.addEventListener('ue:changedSelectedComponent', (e) => {
+    const element = document.querySelector(e.detail);
+    const tab = element.classList.contains('tab-item') ? element : element.closest('.tab-item');
+    if (tab) {
+      const index = tab.getAttribute('data-tab-index');
+      const button = document.querySelector(`button[data-tab-index="${index}"]`);
+      button.click();
+    }
+  });
+}
