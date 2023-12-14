@@ -22,17 +22,14 @@ export default function decorate(block) {
   block.parentElement.append(buttons);
 
   // listener for editor
-  window.addEventListener('ue:changedSelectedComponent', (e) => {
-    const element = document.querySelector(e.detail);
-    if (element.parentElement?.classList.contains('carousel')) {
-      element.parentElement.scrollTo({ top: 0, left: element.offsetLeft - element.parentNode.offsetLeft, behavior: 'instant' });
-
-      const nthSlide = element.offsetLeft / element.parentNode.clientWidth;
+  block.querySelectorAll(':scope > div').forEach((slide) => {
+    slide.addEventListener('aue:ui-select', (e) => {
+      slide.parentElement.scrollTo({ top: 0, left: slide.offsetLeft - slide.parentNode.offsetLeft, behavior: 'instant' });
+      //
+      const nthSlide = slide.offsetLeft / slide.parentNode.clientWidth;
       const button = block.parentElement.querySelector(`.carousel-buttons > button:nth-child(${nthSlide + 1})`);
       [...buttons.children].forEach((r) => r.classList.remove('selected'));
       button.classList.add('selected');
-
-      window.dispatchEvent(new Event('ue:requestOverlayUpdate'));
-    }
+    });
   });
 }

@@ -96,13 +96,11 @@ export default function decorate($block) {
     }
   });
 
-  window.addEventListener('ue:changedSelectedComponent', (e) => {
-    const element = document.querySelector(e.detail);
-    const tab = element.classList.contains('tab-item') ? element : element.closest('.tab-item');
-    if (tab) {
-      const index = tab.getAttribute('data-tab-index');
+  document.querySelectorAll('.tab-item').forEach((tabItem) => {
+    tabItem.addEventListener('aue:ui-select', () => {
+      const index = tabItem.getAttribute('data-tab-index');
       const button = document.querySelector(`button[data-tab-index="${index}"]`);
       button.click();
-    }
+    });
   });
 }
