@@ -97,10 +97,12 @@ export default function decorate($block) {
   });
 
   document.querySelectorAll('.tab-item').forEach((tabItem) => {
-    tabItem.addEventListener('aue:ui-select', () => {
-      const index = tabItem.getAttribute('data-tab-index');
-      const button = document.querySelector(`button[data-tab-index="${index}"]`);
-      button.click();
+    tabItem.addEventListener('aue:ui-select', (e) => {
+      if (e.detail.selected) {
+        const index = tabItem.getAttribute('data-tab-index');
+        const button = document.querySelector(`button[data-tab-index="${index}"]`);
+        button.click();
+      }
     });
   });
 }

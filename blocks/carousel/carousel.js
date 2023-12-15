@@ -24,12 +24,14 @@ export default function decorate(block) {
   // listener for editor
   block.querySelectorAll(':scope > div').forEach((slide) => {
     slide.addEventListener('aue:ui-select', (e) => {
-      slide.parentElement.scrollTo({ top: 0, left: slide.offsetLeft - slide.parentNode.offsetLeft, behavior: 'instant' });
-      //
-      const nthSlide = slide.offsetLeft / slide.parentNode.clientWidth;
-      const button = block.parentElement.querySelector(`.carousel-buttons > button:nth-child(${nthSlide + 1})`);
-      [...buttons.children].forEach((r) => r.classList.remove('selected'));
-      button.classList.add('selected');
+      if (e.detail.selected) {
+        slide.parentElement.scrollTo({ top: 0, left: slide.offsetLeft - slide.parentNode.offsetLeft, behavior: 'instant' });
+        //
+        const nthSlide = slide.offsetLeft / slide.parentNode.clientWidth;
+        const button = block.parentElement.querySelector(`.carousel-buttons > button:nth-child(${nthSlide + 1})`);
+        [...buttons.children].forEach((r) => r.classList.remove('selected'));
+        button.classList.add('selected');
+      }
     });
   });
 }
