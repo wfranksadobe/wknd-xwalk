@@ -33,5 +33,14 @@ export default function decorate(block) {
         button.classList.add('selected');
       }
     });
+
+    slide.addEventListener('aue:content-move', async (e) => {
+      await Promise.resolve();
+
+      const nthSlide = slide.offsetLeft / slide.parentNode.clientWidth;
+      const button = block.parentElement.querySelector(`.carousel-buttons > button:nth-child(${nthSlide + 1})`);
+      [...buttons.children].forEach((r) => r.classList.remove('selected'));
+      button.classList.add('selected');
+    });
   });
 }
