@@ -24,6 +24,7 @@ export default function decorate(block) {
   // listener for editor
   block.querySelectorAll(':scope > div').forEach((slide) => {
     slide.addEventListener('aue:ui-select', (e) => {
+      e.stopPropagation();
       if (e.detail.selected) {
         slide.parentElement.scrollTo({ top: 0, left: slide.offsetLeft - slide.parentNode.offsetLeft, behavior: 'instant' });
         //
