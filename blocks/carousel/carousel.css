@@ -92,7 +92,3 @@ main .carousel-buttons button {
 main .carousel-buttons button.selected {
   background-color: var(--link-color);
 }
-
-.activity main .carousel-container {
-  grid-area: hero;
-}
