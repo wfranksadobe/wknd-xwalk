@@ -95,14 +95,4 @@ export default function decorate($block) {
       tab.$content.classList.remove('hidden');
     }
   });
-
-  document.querySelectorAll('.tab-item').forEach((tabItem) => {
-    tabItem.addEventListener('aue:ui-select', (e) => {
-      if (e.detail.selected) {
-        const index = tabItem.getAttribute('data-tab-index');
-        const button = document.querySelector(`button[data-tab-index="${index}"]`);
-        button.click();
-      }
-    });
-  });
 }

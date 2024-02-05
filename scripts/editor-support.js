@@ -73,4 +73,13 @@ async function addCarouselSelectListener(slide) {
 
 document.querySelectorAll('.carousel.block > div').forEach(addCarouselSelectListener);
 
+document.querySelector('main').addEventListener('aue:ui-select', (e) => {
+  if (e.target.closest('.tab-item') && e.detail.selected) {
+    const tabItem = e.target.closest('.tab-item');
+    const index = tabItem.getAttribute('data-tab-index');
+    const button = tabItem.closest('.tabs-container').querySelector(`button[data-tab-index="${index}"]`);
+    button.click();
+  }
+});
+
 document.addEventListener('editor-update', handleEditorUpdate);
