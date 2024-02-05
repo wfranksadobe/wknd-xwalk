@@ -31,6 +31,8 @@ export default function decorate(block) {
   });
   block.parentElement.append(buttons);
 
+  block.querySelectorAll(':scope > div').forEach((slide) => slide.classList.add('slide'));
+
   block.addEventListener('scrollend', () => {
     const activeElement = Math.round(block.scrollLeft / block.children[0].clientWidth);
     const slide = block.children[activeElement];

@@ -39,47 +39,36 @@ function handleEditorUpdate(event) {
     });
 }
 
-function awaitSectionLoaded(sectionElement) {
-  return new Promise((res) => {
-    const check = () => {
-      setTimeout(() => {
-        const status = sectionElement.closest('.section')?.getAttribute('data-section-status');
-        if (status === 'loaded') {
-          res();
-        } else {
-          check();
-        }
-      }, 100);
-    };
-    check();
-  });
+document.addEventListener('editor-update', handleEditorUpdate);
+
+function handleSelectTabItem(tabItem) {
+  const index = tabItem.getAttribute('data-tab-index');
+  const button = tabItem.closest('.tabs-container').querySelector(`button[data-tab-index="${index}"]`);
+  button.click();
 }
 
-async function addCarouselSelectListener(slide) {
-  // Handle switching the current slide
-  slide.addEventListener('aue:ui-select', (e) => {
-    e.stopPropagation();
-    if (e.detail.selected) {
-      slide.parentElement.scrollTo({ top: 0, left: slide.offsetLeft - slide.parentNode.offsetLeft, behavior: 'instant' });
-      updateButtons(slide);
-    }
-  });
-
-  slide.addEventListener('aue:content-move', async () => {
-    await Promise.resolve();
-    updateButtons(slide);
-  });
+function handleSelectSlide(slide) {
+  slide.parentElement.scrollTo({ top: 0, left: slide.offsetLeft - slide.parentNode.offsetLeft, behavior: 'instant' });
+  updateButtons(slide);
 }
-
-document.querySelectorAll('.carousel.block > div').forEach(addCarouselSelectListener);
 
 document.querySelector('main').addEventListener('aue:ui-select', (e) => {
-  if (e.target.closest('.tab-item') && e.detail.selected) {
-    const tabItem = e.target.closest('.tab-item');
-    const index = tabItem.getAttribute('data-tab-index');
-    const button = tabItem.closest('.tabs-container').querySelector(`button[data-tab-index="${index}"]`);
-    button.click();
+  if (!e.detail.selected) {
+    return;
+  }
+
+  if (e.target.closest('.tab-item')) {
+    handleSelectTabItem(e.target.closest('.tab-item'));
+  }
+
+  if (e.target.closest('.slide')) {
+    handleSelectSlide(e.target.closest('.slide'));
   }
 });
 
-document.addEventListener('editor-update', handleEditorUpdate);
+document.querySelector('main').addEventListener('aue:content-move', async (e) => {
+  if (e.target.closest('.slide')) {
+    await Promise.resolve();
+    updateButtons(e.target.closest('.slide'));
+  }
+});
