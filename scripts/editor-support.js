@@ -1,6 +1,7 @@
 import {
   decorateBlock, decorateButtons, decorateIcons, loadBlock,
 } from './lib-franklin.js';
+import { updateButtons } from '../blocks/carousel/carousel.js';
 
 function handleEditorUpdate(event) {
   const { detail: { itemids } } = event;
@@ -37,5 +38,39 @@ function handleEditorUpdate(event) {
       window.location.reload();
     });
 }
+
+function awaitSectionLoaded(sectionElement) {
+  return new Promise((res) => {
+    const check = () => {
+      setTimeout(() => {
+        const status = sectionElement.closest('.section')?.getAttribute('data-section-status');
+        if (status === 'loaded') {
+          res();
+        } else {
+          check();
+        }
+      }, 100);
+    };
+    check();
+  });
+}
+
+async function addCarouselSelectListener(slide) {
+  // Handle switching the current slide
+  slide.addEventListener('aue:ui-select', (e) => {
+    e.stopPropagation();
+    if (e.detail.selected) {
+      slide.parentElement.scrollTo({ top: 0, left: slide.offsetLeft - slide.parentNode.offsetLeft, behavior: 'instant' });
+      updateButtons(slide);
+    }
+  });
+
+  slide.addEventListener('aue:content-move', async () => {
+    await Promise.resolve();
+    updateButtons(slide);
+  });
+}
+
+document.querySelectorAll('.carousel.block > div').forEach(addCarouselSelectListener);
 
 document.addEventListener('editor-update', handleEditorUpdate);

@@ -1,3 +1,13 @@
+export function updateButtons(activeSlide) {
+  const block = activeSlide.closest('.block');
+  const buttons = block.closest('.carousel-wrapper').querySelector('.carousel-buttons');
+
+  const nthSlide = activeSlide.offsetLeft / activeSlide.parentNode.clientWidth;
+  const button = block.parentElement.querySelector(`.carousel-buttons > button:nth-child(${nthSlide + 1})`);
+  [...buttons.children].forEach((r) => r.classList.remove('selected'));
+  button.classList.add('selected');
+}
+
 export default function decorate(block) {
   const buttons = document.createElement('div');
   buttons.className = 'carousel-buttons';
@@ -21,27 +31,9 @@ export default function decorate(block) {
   });
   block.parentElement.append(buttons);
 
-  // listener for editor
-  block.querySelectorAll(':scope > div').forEach((slide) => {
-    slide.addEventListener('aue:ui-select', (e) => {
-      e.stopPropagation();
-      if (e.detail.selected) {
-        slide.parentElement.scrollTo({ top: 0, left: slide.offsetLeft - slide.parentNode.offsetLeft, behavior: 'instant' });
-        //
-        const nthSlide = slide.offsetLeft / slide.parentNode.clientWidth;
-        const button = block.parentElement.querySelector(`.carousel-buttons > button:nth-child(${nthSlide + 1})`);
-        [...buttons.children].forEach((r) => r.classList.remove('selected'));
-        button.classList.add('selected');
-      }
-    });
-
-    slide.addEventListener('aue:content-move', async (e) => {
-      await Promise.resolve();
-
-      const nthSlide = slide.offsetLeft / slide.parentNode.clientWidth;
-      const button = block.parentElement.querySelector(`.carousel-buttons > button:nth-child(${nthSlide + 1})`);
-      [...buttons.children].forEach((r) => r.classList.remove('selected'));
-      button.classList.add('selected');
-    });
-  });
+  block.addEventListener('scrollend', () => {
+    const activeElement = Math.round(block.scrollLeft / block.children[0].clientWidth);
+    const slide = block.children[activeElement];
+    updateButtons(slide);
+  }, { passive: true });
 }
