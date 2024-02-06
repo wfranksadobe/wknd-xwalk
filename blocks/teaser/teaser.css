@@ -1,3 +1,4 @@
+/* stylelint-disable no-descending-specificity */
 .teaser {
     display: grid;
     grid-template-areas: "teaser";

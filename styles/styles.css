@@ -13,7 +13,6 @@
  :root {
   /* colors */
   --color-yellow: #ffea00;
-
   --link-color: black;
   --link-hover-color: black;
   --background-color: #fff;
@@ -235,9 +234,11 @@ main input:hover {
   border: 1px solid var(--text-color);
 }
 
+/* stylelint-disable no-descending-specificity */
 main .section {
   padding: 64px 16px;
 }
+/* stylelint-enable no-descending-specificity */
 
 main pre {
   background-color: var(--overlay-background-color);

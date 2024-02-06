@@ -98,6 +98,7 @@ function buildTabs(main) {
         const meta = readBlockConfig(sectionMeta);
         return [section, meta.tab];
       }
+      return [];
     })
     .filter((el) => !!el);
   if (tabs.length) {
@@ -105,7 +106,7 @@ function buildTabs(main) {
     section.className = 'section';
     const ul = document.createElement('ul');
     ul.append(...tabs
-      .map(([,tab]) => {
+      .map(([, tab]) => {
         const li = document.createElement('li');
         li.innerText = tab;
         return li;
