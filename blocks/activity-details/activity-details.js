@@ -1,3 +1,9 @@
+function copyAttributes(from, to) {
+  [...from.attributes].forEach(({ nodeName, nodeValue }) => {
+    to.setAttribute(nodeName, nodeValue);
+  });
+}
+
 /**
  *
  * @param {HTMLElement} block
@@ -16,10 +22,4 @@ export default function decorate(block) {
     dl.append(dt, dd);
   });
   block.replaceChildren(dl);
-}
-
-function copyAttributes(from, to) {
-  [...from.attributes].forEach(({ nodeName, nodeValue }) => {
-    to.setAttribute(nodeName, nodeValue);
-  });
 }

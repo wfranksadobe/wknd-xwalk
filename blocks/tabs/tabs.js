@@ -53,11 +53,6 @@ export function createTabs($block) {
 export default function decorate($block) {
   const tabs = createTabs($block);
 
-  // move the tab riders in front
-  //const $wrapper = $block.parentElement;
-  //const $container = $wrapper.parentElement;
-  //$container.insertBefore($wrapper, $container.firstElementChild);
-
   tabs.forEach((tab, index) => {
     const $button = document.createElement('button');
     const { $tab, title, name } = tab;
