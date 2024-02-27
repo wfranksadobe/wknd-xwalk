@@ -29,6 +29,26 @@
     color: #fff;
 }
 
-.activity main .tabs-container {
-    grid-area: main;
+body.activity main {
+    grid-auto-flow: column;
+    grid-template-rows: auto auto min-content 100%;
+    grid-template-areas:
+        "bread bread bread bread"
+        "hero hero hero hero"
+        "padleft left tabs padright"
+        "padleft left main padright";
+}
+
+body.activity main .tabs-container {
+    grid-area: tabs;
+    padding-bottom: 0;
+}
+
+body.activity main [data-tab] {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+body.activity main [data-tab] :first-child {
+    margin-top: 0;
 }

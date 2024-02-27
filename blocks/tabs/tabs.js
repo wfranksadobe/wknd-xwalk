@@ -28,19 +28,14 @@ export function createTabs($block) {
   $block.replaceChildren($ul);
 
   // search referenced sections and move them inside the tab-container
-  const $wrapper = $block.parentElement;
-  const $container = $wrapper.parentElement;
   const $sections = document.querySelectorAll('[data-tab]');
 
   // move the tab's sections before the tab riders.
   [...$sections].forEach(($tabContent) => {
     const name = $tabContent.dataset.tab.toLowerCase().trim();
-    /** @type TabInfo */
     const tab = tabs.find((t) => t.name === name);
     if (tab) {
       $tabContent.classList.add('tab-item', 'hidden');
-      $tabContent.classList.remove('section');
-      $container.append($tabContent);
       tab.$content = $tabContent;
     }
   });
