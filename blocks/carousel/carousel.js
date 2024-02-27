@@ -18,5 +18,6 @@ export default function decorate(block) {
     });
     buttons.append(button);
   });
-  block.parentElement.append(buttons);
+  if (block.nextElementSibling) block.nextElementSibling.replaceWith(buttons);
+  else block.parentElement.append(buttons);
 }
