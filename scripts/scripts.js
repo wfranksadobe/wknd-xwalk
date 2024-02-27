@@ -98,7 +98,7 @@ function buildTabs(main) {
         const meta = readBlockConfig(sectionMeta);
         return [section, meta.tab];
       }
-      return [];
+      return null;
     })
     .filter((el) => !!el);
   if (tabs.length) {
