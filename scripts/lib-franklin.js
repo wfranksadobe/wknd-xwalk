@@ -246,7 +246,7 @@ export function getPlaceholderOrDefault(key, defaultText) {
  */
 export function decorateBlock(block) {
   const shortBlockName = block.classList[0];
-  if (shortBlockName) {
+  if (shortBlockName && !block.dataset.blockStatus) {
     block.classList.add('block');
     block.setAttribute('data-block-name', shortBlockName);
     block.setAttribute('data-block-status', 'initialized');
