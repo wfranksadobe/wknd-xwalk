@@ -6,8 +6,7 @@ import {
   decorateSections,
   loadBlock,
   loadBlocks,
-} from './lib-franklin.js';
-// eslint-disable-next-line import/no-unresolved
+} from './aem.js';
 import { decorateRichtext } from './editor-support-rte.js';
 import { decorateMain } from './scripts.js';
 
@@ -51,8 +50,8 @@ async function applyChanges(event) {
         block.insertAdjacentElement('afterend', newBlock);
         decorateButtons(newBlock);
         decorateIcons(newBlock);
-        decorateRichtext(newBlock);
         decorateBlock(newBlock);
+        decorateRichtext(newBlock);
         await loadBlock(newBlock);
         block.remove();
         newBlock.style.display = null;
