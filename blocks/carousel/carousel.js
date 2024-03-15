@@ -1,3 +1,13 @@
+export function updateButtons(activeSlide) {
+  const block = activeSlide.closest('.block');
+  const buttons = block.closest('.carousel-wrapper').querySelector('.carousel-buttons');
+
+  const nthSlide = activeSlide.offsetLeft / activeSlide.parentNode.clientWidth;
+  const button = block.parentElement.querySelector(`.carousel-buttons > button:nth-child(${nthSlide + 1})`);
+  [...buttons.children].forEach((r) => r.classList.remove('selected'));
+  button.classList.add('selected');
+}
+
 export default function decorate(block) {
   const buttons = document.createElement('div');
   [...block.children].forEach((row, i) => {
@@ -20,4 +30,12 @@ export default function decorate(block) {
   });
   if (block.nextElementSibling) block.nextElementSibling.replaceWith(buttons);
   else block.parentElement.append(buttons);
+
+  block.querySelectorAll(':scope > div').forEach((slide) => slide.classList.add('slide'));
+
+  block.addEventListener('scrollend', () => {
+    const activeElement = Math.round(block.scrollLeft / block.children[0].clientWidth);
+    const slide = block.children[activeElement];
+    updateButtons(slide);
+  }, { passive: true });
 }

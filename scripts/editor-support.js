@@ -6,9 +6,10 @@ import {
   decorateSections,
   loadBlock,
   loadBlocks,
-} from './aem.js';
+} from './lib-franklin.js';
 import { decorateRichtext } from './editor-support-rte.js';
 import { decorateMain } from './scripts.js';
+import { updateButtons } from '../blocks/carousel/carousel.js';
 
 async function applyChanges(event) {
   // redecorate default content and blocks on patches (in the properties rail)
@@ -88,6 +89,25 @@ async function applyChanges(event) {
   return false;
 }
 
+function updateUi(event) {
+  const { detail, target } = event;
+  if (!detail.selected) return;
+
+  function handleSelectTabItem(tabItem) {
+    const index = tabItem.getAttribute('data-tab-index');
+    const button = tabItem.closest('.tabs-container').querySelector(`button[data-tab-index="${index}"]`);
+    button.click();
+  }
+  
+  function handleSelectSlide(slide) {
+    slide.parentElement.scrollTo({ top: 0, left: slide.offsetLeft - slide.parentNode.offsetLeft, behavior: 'instant' });
+    updateButtons(slide);
+  }
+
+  if (target.closest('.tab-item')) handleSelectTabItem(target.closest('.tab-item'));
+  if (target.closest('.slide')) handleSelectSlide(target.closest('.slide'));
+}
+
 function attachEventListners(main) {
   [
     'aue:content-patch',
@@ -100,6 +120,8 @@ function attachEventListners(main) {
     const applied = await applyChanges(event);
     if (!applied) window.location.reload();
   }));
+
+  main.addEventListener('aue:ui-select', updateUi);
 }
 
 attachEventListners(document.querySelector('main'));

@@ -52,7 +52,10 @@ export default function decorate($block) {
     const $button = document.createElement('button');
     const { $tab, title, name } = tab;
     $button.textContent = title;
+    $button.setAttribute('data-tab-index', index);
     $tab.replaceChildren($button);
+
+    tab.$content.setAttribute('data-tab-index', index);
 
     $button.addEventListener('click', () => {
       const $activeButton = $block.querySelector('button.active');
