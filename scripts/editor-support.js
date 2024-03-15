@@ -39,7 +39,7 @@ async function applyChanges(event) {
       newMain.style.display = null;
       // eslint-disable-next-line no-use-before-define
       attachEventListners(newMain);
-      return true;
+      return newMain;
     }
 
     const block = element.parentElement?.closest('.block[data-aue-resource]') || element?.closest('.block[data-aue-resource]');
@@ -56,7 +56,7 @@ async function applyChanges(event) {
         await loadBlock(newBlock);
         block.remove();
         newBlock.style.display = null;
-        return true;
+        return newBlock;
       }
     } else {
       // sections and default content, may be multiple in the case of richtext
@@ -81,12 +81,12 @@ async function applyChanges(event) {
           decorateIcons(parentElement);
           decorateRichtext(parentElement);
         }
-        return true;
+        return newElements;
       }
     }
   }
 
-  return false;
+  return null;
 }
 
 function updateUi(event) {
@@ -118,7 +118,12 @@ function attachEventListners(main) {
   ].forEach((eventType) => main?.addEventListener(eventType, async (event) => {
     event.stopPropagation();
     const applied = await applyChanges(event);
-    if (!applied) window.location.reload();
+    if (!applied) {
+      window.location.reload();
+      return;
+    }
+
+    updateUi({ detail: { selected: true }, target: applied });
   }));
 
   main.addEventListener('aue:ui-select', updateUi);
