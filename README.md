@@ -8,7 +8,7 @@ Codebase for the fictional WKND site, showcasing the capabilities of Adobe's Edg
 
 ## Environments
 - Preview: https://main--wknd-xwalk--adobe-rnd.hlx.page/
-- Live: https://main--wknd-xwalk--adobe-rnde.hlx.live/
+- Live: https://main--wknd-xwalk--adobe-rnd.hlx.live/
 
 ## Installation
 
