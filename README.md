@@ -7,8 +7,8 @@ Codebase for the fictional WKND site, showcasing the capabilities of Adobe's Edg
 - Document based content authoring
 
 ## Environments
-- Preview: https://main--wknd-xwalk--adobe-rnd.hlx.page/
-- Live: https://main--wknd-xwalk--adobe-rnd.hlx.live/
+- Preview: https://main--wknd-xwalk--adobe-rnd.aem.page/
+- Live: https://main--wknd-xwalk--adobe-rnd.aem.live/
 
 ## Installation
 
@@ -53,7 +53,7 @@ Before you begin, ensure you have the [AEM Sidekick Chrome extension](https://ch
 - Install the Github bot on your forked repository using this link: https://github.com/apps/helix-bot/installations/new
 - Using the AEM sidekick, publish the content that you would like to track conversions for (at minimum, the index and adventures documents)
 - For details on project setup, reference the [Developer Tutorial](https://www.hlx.live/developer/tutorial)
-- Follow the [Slack Bot installation docs](https://www.hlx.live/docs/slack) to set up the bot in your own channel
+- Follow the [Slack Bot installation docs](https://www.aem.live/docs/slack) to set up the bot in your own channel
 - To generate some traffic data for your forked site, you can use the included Puppeteer script (/test/puppeteer/generate-traffic.mjs):
 
 ```sh
@@ -68,11 +68,11 @@ WKND_URL=https://main--wknd--hlxsites.hlx.live ITERATIONS=1000 npm run generate-
 [Slack Bot docs](https://www.hlx.live/docs/slack)
 
 - Follow the "Conversion Tracking" steps above to enable the Slack Bot
-- Refer to the [Slack Bot Skills](https://www.hlx.live/docs/slack#slack-bot-skills) section for details on querying the underlying data from Slack
+- Refer to the [Slack Bot Skills](https://www.aem.live/docs/slack#slack-bot-skills) section for details on querying the underlying data from Slack
 - To query the performance of an experiment, try the following command: `@Franklin Bot how is experiment experiment-0001 doing?` 
 
 ### Document based content authoring
-[Authoring docs](https://www.hlx.live/docs/authoring)
+[Authoring docs](https://www.aem.live/docs/authoring)
 
 - Follow the "Conversion Tracking" steps above, ensuring that fstab.yaml in your fork points to a SharePoint or Google Drive folder that you own
 - Refer to the [Authoring docs](https://www.hlx.live/docs/authoring) for details on authoring functionality
