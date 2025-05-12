@@ -193,7 +193,6 @@ header nav[aria-expanded='true'] .nav-tools li {
 
   header nav .nav-sections {
     display: unset;
-    justify-self: flex-end;
   }
 
   header nav .nav-brand {
@@ -207,6 +206,7 @@ header nav[aria-expanded='true'] .nav-tools li {
     background-color: unset;
     width: unset;
     margin: 0;
+    justify-content: flex-end;
   }
 
   header nav[aria-expanded='true'] .nav-sections ol {
