@@ -1,6 +1,7 @@
 {
   "mappings": [
     "/content/wknd-xwalk/:/",
+    "/content/wknd-xwalk/us/en/nav.plain.html:/us/en/magazine/nav.plain.html",
     "/content/wknd-xwalk/metadata.json:/metadata.json",
     "/content/wknd-xwalk/redirects.json:/redirects.json"
   ],
