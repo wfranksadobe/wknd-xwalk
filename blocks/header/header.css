@@ -207,6 +207,7 @@ header nav[aria-expanded='true'] .nav-tools li {
     width: unset;
     margin: 0;
     justify-content: flex-end;
+    padding-right: 50px;
   }
 
   header nav[aria-expanded='true'] .nav-sections ol {
