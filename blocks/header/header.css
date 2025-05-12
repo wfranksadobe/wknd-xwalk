@@ -165,6 +165,8 @@ header nav[aria-expanded='true'] .nav-tools li {
     justify-content: space-between;
     height: var(--nav-height);
     padding: 16px;
+    max-width: 90%;
+    padding-left: 10%;
   }
 
   header nav .nav-sections > ul > li.nav-drop {
@@ -191,10 +193,12 @@ header nav[aria-expanded='true'] .nav-tools li {
 
   header nav .nav-sections {
     display: unset;
+    justify-self: flex-end;
   }
 
   header nav .nav-brand {
-    flex: 0 0 150px;
+    flex: 0 0 auto;
+    padding-right: 50px;
   }
 
   header nav .nav-sections ul {
