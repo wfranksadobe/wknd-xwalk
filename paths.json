@@ -1,9 +1,9 @@
 {
   "mappings": [
     "/content/wknd-xwalk/:/",
-    "/content/wknd-xwalk/metadata.json:/metadata.json",
-    "/content/wknd-xwalk/placeholders.json:/placeholders.json",
-    "/content/wknd-xwalk/redirects.json:/redirects.json"
+    "/content/wknd-xwalk/metadata:/metadata.json",
+    "/content/wknd-xwalk/placeholders:/placeholders.json",
+    "/content/wknd-xwalk/redirects:/redirects.json"
   ],
   "includes": ["/content/wknd-xwalk"]
 }
