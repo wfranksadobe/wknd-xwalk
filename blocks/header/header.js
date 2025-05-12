@@ -21,7 +21,7 @@ export default async function decorate(block) {
   const navMeta = getMetadata('nav');
   const navPath = navMeta ? new URL(navMeta, window.location).pathname : (window.wknd.demoConfig.demoBase || '/nav');
 
-  const resp = await fetch(`${getSiteRoot(5)}${navPath}.plain.html`, window.location.pathname.endsWith('/nav') ? { cache: 'reload' } : {});
+  const resp = await fetch(`${getSiteRoot()}${navPath}.plain.html`, window.location.pathname.endsWith('/nav') ? { cache: 'reload' } : {});
   if (resp.ok) {
     const html = await resp.text();
 
